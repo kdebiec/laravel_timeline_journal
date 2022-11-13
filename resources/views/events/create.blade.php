@@ -9,6 +9,7 @@
                     @csrf
                     <x-bladewind.input name="event_name" label="Event name"  />
                     <x-input-error :messages="$errors->get('event_name')" class="" />
+                    @if(isset($eventtypes) && !empty($eventtypes))
                     <x-bladewind.dropdown
                         placeholder="Choose event type"
                         searchable="true"
@@ -18,6 +19,7 @@
                         value_key="id"
                         data="{{ json_encode($eventtypes) }}" 
                     />
+                    @endif
                     <x-bladewind.textarea name="short_desc" label="Short description"  />
                     <x-input-error :messages="$errors->get('short_desc')" class="" />
                     <x-bladewind.textarea name="long_desc" label="Long description"  />
