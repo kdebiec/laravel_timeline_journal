@@ -25,10 +25,10 @@ class EventTypePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\EventType  $eventType
+     * @param  \App\Models\EventType  $eventtype
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, EventType $eventType)
+    public function view(User $user, EventType $eventtype)
     {
         //
     }
@@ -48,10 +48,10 @@ class EventTypePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\EventType  $eventType
+     * @param  \App\Models\EventType  $eventtype
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, EventType $eventType)
+    public function update(User $user, EventType $eventtype)
     {
         return true;
     }
@@ -60,10 +60,10 @@ class EventTypePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\EventType  $eventType
+     * @param  \App\Models\EventType  $eventtype
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, EventType $eventType)
+    public function delete(User $user, EventType $eventtype)
     {
         return true;
     }
@@ -72,10 +72,10 @@ class EventTypePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\EventType  $eventType
+     * @param  \App\Models\EventType  $eventtype
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, EventType $eventType)
+    public function restore(User $user, EventType $eventtype)
     {
         //
     }
@@ -84,10 +84,10 @@ class EventTypePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\EventType  $eventType
+     * @param  \App\Models\EventType  $eventtype
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, EventType $eventType)
+    public function forceDelete(User $user, EventType $eventtype)
     {
         //
     }

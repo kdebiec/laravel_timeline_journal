@@ -6,7 +6,11 @@
                     <div class="flex justify-between items-center">
                         <div>
                             <span class="font-bold tracking-tight text-gray-800">{{ $event->event_name }}</span>
-                            <small class="ml-2 text-sm text-gray-600">{{ $event->created_at->format('j M Y') }}</small>
+                            <small class="ml-2 text-sm text-gray-600">{{ $event->start_date }}</small>
+                            @if(isset($event->end_date) && !empty($event->end_date))
+                                <small class="ml-2 text-sm text-gray-600">-</small>
+                                <small class="ml-2 text-sm text-gray-600">{{ $event->end_date }}</small>
+                            @endif
                             @unless ($event->created_at->eq($event->updated_at))
                                 <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
                             @endunless
@@ -35,6 +39,7 @@
                             </x-dropdown>
                         @endif
                     </div>
+                    <x-bladewind.tag label="{{ $event->event_type->name }}" color="{{ $event->event_type->color }}"/>
                     <div class="mt-2">
                         <div class="mt-0">
                             <p class="text-sm text-gray-600">{{ $event->short_desc }}</p>

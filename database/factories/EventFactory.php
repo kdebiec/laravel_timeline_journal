@@ -23,6 +23,7 @@ class EventFactory extends Factory
             'event_type_id' => EventType::inRandomOrder()->value('id'),
             'user_id' => User::inRandomOrder()->value('id'),
             'image' => "",
+            'is_process' => false,
         ];
     }
 }

@@ -21,16 +21,16 @@
         <div class="overflow-x-auto shadow-lg sm:rounded-lg">
             <div class="inline-block min-w-full align-middle">
                 <div class="overflow-hidden ">
-                    <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
-                        <thead class="bg-gray-100 dark:bg-gray-700">
+                    <table class="min-w-full divide-y divide-gray-200 table-fixed">
+                        <thead class="bg-gray-100">
                             <tr>
-                                <th scope="col" class="p-4 flex items-center text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                <th scope="col" class="p-4 flex items-center text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                     Lp
                                 </th>
-                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                     Event Type Name
                                 </th>
-                                <th scope="col" class="py-3 px-6 pl-12 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                <th scope="col" class="py-3 px-6 pl-12 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                     Color
                                 </th>
                                 <th scope="col" class="p-4">
@@ -41,37 +41,30 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                            @foreach ($event_types as $event_type)
-                            <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <td class="p-4 w-4 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$loop->index+1}}</td>
-                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$event_type->name}}</td>
-                                <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($eventtypes as $eventtype)
+                            <tr class="hover:bg-gray-100">
+                                <td class="p-4 w-4 text-sm font-medium text-gray-900 whitespace-nowrap">{{$loop->index+1}}</td>
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">{{$eventtype->name}}</td>
+                                <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap">
                                     <div class="relative rounded-md ">
                                         <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none text-secondary-400">
                                             <span class="flex items-center self-center pl-1">
-                                                <div class="w-4 h-4 rounded shadow border" style="background-color:{{ $event_type->color}};"></div>
+                                                <div class="w-4 h-4 rounded shadow border" style="background-color:{{ $eventtype->color}};"></div>
                                             </span>
                                         </div>
-                                        <p class="block w-full pl-8">{{$event_type->color}}</p>
+                                        <p class="block w-full pl-8">{{$eventtype->color}}</p>
                                     </div>
                                 </td>
                                 <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <a href="{{route('eventtypes.edit', $eventtype)}}" class="text-blue-600 hover:underline">Edit</a>
                                 </td>
                                 <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                    {{-- <form method="POST" action="{{ route('eventtypes.destroy', $event_type) }}">
-                                        @csrf
-                                        @method('delete')
-                                        <x-dropdown-link :href="route('eventtypes.destroy', $event_type)" onclick="event.preventDefault(); this.closest('form').submit();" class="text-blue-600 dark:text-blue-500 hover:underline">
-                                            {{ __('Delete') }}
-                                        </x-dropdown-link>
-                                    </form> --}}
-                                    <form action="{{ route('eventtypes.destroy', $event_type->id) }}" method="POST">
+                                    <form action="{{ route('eventtypes.destroy', $eventtype) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                          <button type="submit" class="text-red-600 hover:text-red-900">{{$event_type->id}}</button>
-                                      </form>
+                                          <button type="submit" class="text-red-600 hover:text-red-900">Remove</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

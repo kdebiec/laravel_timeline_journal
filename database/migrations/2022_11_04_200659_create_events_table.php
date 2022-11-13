@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('short_desc');
             $table->string('long_desc');
             $table->date('start_date');
+            $table->boolean('is_process');
+            $table->date('end_date')->nullable();
             $table->string('image');
             $table->foreignId('event_type_id');
             $table->timestamps();

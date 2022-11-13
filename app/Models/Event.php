@@ -17,7 +17,8 @@ class Event extends Model
         'long_desc',
         'image',
         'start_date',
-        'end_date'
+        'end_date',
+        'event_type_id'
     ];
 
     public function user()

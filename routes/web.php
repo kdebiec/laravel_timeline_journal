@@ -28,7 +28,7 @@ Route::resource('events', EventController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('eventtypes', EventTypeController::class)
-    ->only(['index', 'store', 'update', 'destroy'])
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

@@ -14,9 +14,9 @@ class EventTypeController extends Controller
      */
     public function index()
     {
-        $event_types = EventType::all();
+        $eventtypes = EventType::all();
 
-        return view('eventtypes.index')->with('event_types', $event_types);
+        return view('eventtypes.index')->with('eventtypes', $eventtypes);
     }
 
     /**
@@ -54,10 +54,10 @@ class EventTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EventType  $eventType
+     * @param  \App\Models\EventType  $eventtype
      * @return \Illuminate\Http\Response
      */
-    public function show(EventType $eventType)
+    public function show(EventType $eventtype)
     {
         //
     }
@@ -65,44 +65,51 @@ class EventTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EventType  $eventType
+     * @param  \App\Models\EventType  $eventtype
      * @return \Illuminate\Http\Response
      */
-    public function edit(EventType $eventType)
+    public function edit(EventType $eventtype)
     {
-        //
+        return view('eventtypes.edit', [
+            'eventtype' => $eventtype,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\EventType  $eventType
+     * @param  \App\Models\EventType  $eventtype
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EventType $eventType)
+    public function update(Request $request, EventType $eventtype)
     {
-        //
+        //$this->authorize('update', $eventtype);
+        error_log($eventtype);
+        error_log("eventtype");
+ 
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'color' => [
+                'required',
+                'string',
+                'regex:/^(#[a-zA-Z0-9]{6})$/i'
+            ],
+        ]);
+        $eventtype->update($validated);
+
+        return redirect(route('eventtypes.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EventType  $eventType
+     * @param  \App\Models\EventType  $eventtype
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EventType $eventType)
+    public function destroy(Request $request, EventType $eventtype)
     {
-        //$this->authorize('delete', $eventType);
-        // if ($eventType->id == 6) {
-        //     return redirect(route('2'));
-        // } else {
-        //     return redirect(route('5'));
-        // }
-
-        $eventType->delete();
-        //EventType::destroy([$eventType->id]);
-        //EventType::find($eventType->id)->delete();
+        $eventtype->delete();
         return redirect(route('eventtypes.index'));
     }
 }

@@ -66,9 +66,9 @@
     $with_dots = ($with_dots == 'true') ? 1 : 0;
 @endphp
 
-<div class="relative w-full @if($add_clearing == 'true') mb-3 @endif">
-    <input 
-        {{ $attributes->merge(['class' => "bw-input w-full text-slate-600 border border-slate-300/50 dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer $is_required $name $placeholder_color"]) }}
+<div class="relative w-full @if($add_clearing == 'true') mb-3 @endif">    
+    <input
+        {{ $attributes->merge(['class' => "bw-input w-full text-slate-600 border border-slate-300/50  peer $is_required $name $placeholder_color"]) }}
         type="{{ $type }}" 
         id="{{ $name }}"
         name="{{ $name }}" 
@@ -84,7 +84,6 @@
     />
     @if($error_message != '')<div class="text-red-500 text-xs p-1 {{ $name }}-inline-error hidden">{{$error_message}}</div>@endif
     @if($label !== '')
-    {{-- dark:bg-slate-600 dark:text-gray-300 dark:rounded-sm dark:px-2 dark:peer-focus:pt-1 --}}
         <label for="{{ $name }}" class="form-label bg-white text-blue-900/40 " onclick="dom_el('.{{$name}}').focus()">{!! $label !!} 
             @if($required == 'true') 
             <span class="text-red-300">

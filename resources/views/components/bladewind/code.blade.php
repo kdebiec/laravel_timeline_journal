@@ -35,7 +35,7 @@
                     add_clearing="false" 
                     onkeydown="hidePinError('{{$name}}')"
                     onkeyup="movePinNext('{{$name}}', {{$x}}, {{$total_digits}}, '{{$on_verify}}', event)"
-                    class="w-14 shadow-sm text-center text-xl font-light text-black dark:text-white {{$name}}-pin-code {{$name}}-pcode{{$x}}" 
+                    class="w-14 shadow-sm text-center text-xl font-light text-black {{$name}}-pin-code {{$name}}-pcode{{$x}}" 
                     maxlength="1" />
             @endfor
         </div>

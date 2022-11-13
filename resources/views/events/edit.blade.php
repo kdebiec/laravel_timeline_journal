@@ -10,6 +10,16 @@
                     @method('patch')
                     <x-bladewind.input class="text-sm" name="event_name" label="Event name" selected_value="{{ old('event_name', $event->event_name) }}"/>
                     <x-input-error :messages="$errors->get('event_name')" class="" />
+                    <x-bladewind.dropdown
+                        placeholder="Choose event type"
+                        searchable="true"
+                        name="event_type_id"
+                        label_key="name"
+                        labelKey="name"
+                        value_key="id"
+                        data="{{ json_encode($eventtypes) }}" 
+                        selected_value="{{ old('event_type_id', $event->event_type_id) }}"
+                    />
                     <x-bladewind.textarea name="short_desc" label="Short description"  selected_value="{{ old('short_desc', $event->short_desc) }}" />
                     <x-input-error :messages="$errors->get('short_desc')" class="" />
                     <x-bladewind.textarea name="long_desc" label="Long description" selected_value="{{ old('long_desc', $event->long_desc) }}" />

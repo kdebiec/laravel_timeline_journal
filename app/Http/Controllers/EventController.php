@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,7 +28,10 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('events.create');
+        $eventtypes = EventType::all();
+        return view('events.create', [
+            'eventtypes' => $eventtypes
+        ]);
     }
 
     /**
@@ -43,8 +47,21 @@ class EventController extends Controller
             'short_desc' => 'required|string|max:255',
             'long_desc'  => 'required|string',
             'start_date' => 'required|date',
-            "image"      => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
+            "image"      => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            "event_type_id" => 'required|exists:event_types,id',
+            "post_type" => 'required|string',
+            "end_date" => 'nullable|string'
         ]);
+
+        if ($request->has('post_type')) {
+            if ($validated['post_type'] == 'event') {
+                unset($validated['post_type']);
+                $validated['is_process'] = false;
+            } else {
+                unset($validated['post_type']);
+                $validated['is_process'] = true;
+            }
+        }
 
         if ($request->has('image')) {
             $image_path = $request->file('image')->store('image', 'public');
@@ -80,9 +97,11 @@ class EventController extends Controller
     public function edit(Event $event)
     {
         $this->authorize('update', $event);
- 
+        $eventtypes = EventType::all();
+        
         return view('events.edit', [
             'event' => $event,
+            'eventtypes' => $eventtypes
         ]);
     }
 
@@ -96,13 +115,27 @@ class EventController extends Controller
     public function update(Request $request, Event $event)
     {
         $this->authorize('update', $event);
- 
+
         $validated = $request->validate([
             'event_name' => 'required|string|max:255',
             'short_desc' => 'required|string|max:255',
             'long_desc'  => 'required|string',
             'start_date' => 'required|date',
+            "image"      => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            "event_type_id" => 'required|exists:event_types,id',
+            "post_type" => 'required|string',
+            "end_date" => 'nullable|string'
         ]);
+
+        if ($request->has('post_type')) {
+            if ($validated['post_type'] == 'event') {
+                unset($validated['post_type']);
+                $validated['is_process'] = false;
+            } else {
+                unset($validated['post_type']);
+                $validated['is_process'] = true;
+            }
+        }
  
         $event->update($validated);
  

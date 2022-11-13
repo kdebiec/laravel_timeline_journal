@@ -75,9 +75,9 @@
             @foreach ($events as $event)
             <div class="flex text-slate-600">
                 <div class="z-20">
-                    <div class="h-8 w-8 @if($status=='pending') bg-white border-4 {{ $coloring['border'][$color] }}  @else {{$coloring['bg'][$color]}} @endif rounded-full"></div>
+                    <div class="h-8 w-8 @if($status=='pending') bg-white border-4 {{ $coloring['border'][$color] }}  @else {{$coloring['bg'][$color]}} @endif rounded-full" style="border-color: {{$event->event_type->color}}"></div>
                 </div>
-                <div class="@if(!$loop->last) border-l-4 {{ $coloring['border'][$color] }}@endif pl-8 pb-14 z-10" style="margin-left: -18px">
+                <div class="@if(!$loop->last) border-l-4 {{ $coloring['border'][$color] }}@endif pl-8 pb-14 z-10" style="margin-left: -18px; border-color: {{$event->event_type->color}}">
                     <div class="bg-white shadow-sm rounded-lg divide-y">
                         <a href="{{route('events.show', $event)}}">
                             <div class="p-6 w-96">
@@ -85,12 +85,17 @@
                                     <div class="flex justify-between items-center">
                                         <div>
                                             <span class="font-bold tracking-tight text-gray-800">{{ $event->event_name }}</span>
-                                            <small class="ml-2 text-sm text-gray-600">{{ $event->created_at->format('j M Y') }}</small>
+                                            <small class="ml-2 text-sm text-gray-600">{{ $event->start_date }}</small>
+                                            @if(isset($event->end_date) && !empty($event->end_date))
+                                                <small class="ml-2 text-sm text-gray-600">-</small>
+                                                <small class="ml-2 text-sm text-gray-600">{{ $event->end_date }}</small>
+                                            @endif
                                             @unless ($event->created_at->eq($event->updated_at))
                                                 <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
                                             @endunless
                                         </div>
                                     </div>
+                                    <x-bladewind.tag label="{{ $event->event_type->name }}" color="{{ $event->event_type->color }}"/>
                                     <div class="mt-2">
                                         <div class="mt-0">
                                             <p class="text-sm text-gray-600">{{ $event->short_desc }}</p>
